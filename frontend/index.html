@@ -35,7 +35,21 @@
           </div>
         </div>
         <div class="col-md-6">
-          <h2>Posts</h2>
+          <h2>Reviews</h2>
+          <div class="form-group">
+            <label for="exampleCombobox">Order by:</label>
+            <select class="form-control" id="sortCriteria">
+                <option value="vader_neg">Vader negative</option>
+                <option value="vader_neu">Vader neutral</option>
+                <option value="vader_pos">Vader positive</option>
+                <option value="roberta_neg">Roberta negative</option>
+                <option value="roberta_neu">Roberta neutral</option>
+                <option value="roberta_pos">Roberta positive</option>
+                
+                <!-- Add more options and order them as needed -->
+            </select>
+        </div>
+        
           <div id="post-list"></div>
         </div>
       </div>
