@@ -1,5 +1,5 @@
-mainColor = "#A6979C";
-highlightColor = "red";
+mainColor = "#4294FF";
+highlightColor = "#E6ECFF";
 
 fetch("/data/data.json")
   .then((response) => {
