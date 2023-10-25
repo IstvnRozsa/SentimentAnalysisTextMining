@@ -22,7 +22,7 @@ function generateFeedbackHTML(feedback) {
               <div class="media-body">
                 <div class="d-flex align-items-center">
                   <img src="img/star.png" alt="Star" class="star" />
-                  ${Array(feedback.Score)
+                  ${Array(feedback.Score-1)
                     .fill('<img src="img/star.png" alt="Star" class="star" />')
                     .join("")}
                 </div>
@@ -74,4 +74,35 @@ function drawList(data) {
       data[i]
     );
   }
+}
+
+let selectedScore = null;
+function handleSelectStar(barId, full_data) {
+  let svgScoreChart = d3.select("#score-chart");
+  if (selectedScore == barId) {
+    svgScoreChart.selectAll("rect").attr("fill", mainColor);
+    selectedScore = null;
+  } else {
+    selectedScore = barId;
+    let rectID = "rect#" + selectedScore;
+    svgScoreChart.selectAll("rect").attr("fill", mainColor);
+    svgScoreChart.select(rectID).attr("fill", highlightColor);
+    let selectedScoreValue = parseInt(selectedScore.substring(2));
+    console.log(selectedScoreValue);
+    console.log(full_data.filter(d => d["Score"] === selectedScoreValue));
+  }
+}
+
+function groupData(data, key_text) {
+    const groupedDataByScore = data.reduce((acc, obj) => {
+        const key = obj[key_text];
+        if (!acc[key]) {
+          acc[key] = { [key_text]: key, Count: 0 };
+        }
+        acc[key].Count++;
+        return acc;
+      }, {});
+  
+      // Convert the grouped data back to an array of objects
+      return Object.values(groupedDataByScore); 
 }

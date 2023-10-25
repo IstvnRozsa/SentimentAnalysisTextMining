@@ -1,4 +1,4 @@
-function drawHorizontalBarChart(id, data, name, value) {
+function drawHorizontalBarChart(id, data, name, value, ) {
     let svgToRemove = d3.select(id).select("svg");
     svgToRemove.remove();
 
@@ -30,6 +30,7 @@ function drawHorizontalBarChart(id, data, name, value) {
         .data(data)
         .enter()
         .append("rect")
+        .attr("id", d => "ID" + d[name])
         .attr("y", d => yScale(d[name]))
         .attr("width", d => xScale(d[value]))
         .attr("height", yScale.bandwidth())
