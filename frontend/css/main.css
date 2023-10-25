@@ -5,3 +5,18 @@
     direction: ltr;
     display: inline-block;
 }
+
+path{
+    stroke: #adb5bd;
+}
+line{
+    stroke: #adb5bd;
+}
+text{
+    fill: #adb5bd;
+}
+
+.sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+}
