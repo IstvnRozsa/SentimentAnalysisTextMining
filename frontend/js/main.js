@@ -71,36 +71,49 @@ fetch("/data/data.json")
 
     // Output the result
     console.log("Group by vader label:", groupByScoreVaderLabel);
+    let selectedCriteria = "vader_neg"
+    let selectedDirection = "desc";
 
     let comboboxSortCriteria = d3.select("#sortCriteria");
     comboboxSortCriteria.on("change", function () {
       // Get the selected value
-      let selectedCriteria = d3.select(this).property("value");
-      console.log("Selcted Sort Criteria: ", selectedCriteria);
+      selectedCriteria = d3.select(this).property("value");
+      selectedDirection = "desc";
+      console.log("Selected Sort Criteria: ", selectedCriteria);
+      console.log("Selected direction: ", selectedDirection)
       data.sort(function(a, b) {
-        if (a[selectedCriteria] < b[selectedCriteria]) {
-            return -1;
+        if(selectedDirection=="asc"){
+          return a[selectedCriteria] - b[selectedCriteria];
         }
-        if (a[selectedCriteria] > b[selectedCriteria]) {
-            return 1;
+        else{
+          return b[selectedCriteria] - a[selectedCriteria];
         }
-        return 0;
+        
       });
       console.log(data);
-      var element = document.getElementById("post-list");
-      element.innerHTML = "";
-      for (let i = 0; i < 15; i++) {
-        document.getElementById("post-list").innerHTML += generateFeedbackHTML(
-          data[i]
-        );
-      }
+      drawList(data);
     });
 
-    for (let i = 0; i < 15; i++) {
-      document.getElementById("post-list").innerHTML += generateFeedbackHTML(
-        data[i]
-      );
-    }
+    let comboboxDirection = d3.select("#selectDirection");
+    comboboxDirection.on("change", function () {
+      // Get the selected value
+      selectedDirection = d3.select(this).property("value");
+      console.log("Selected Sort Criteria: ", selectedCriteria);
+      console.log("Selected direction: ", selectedDirection)
+      data.sort(function(a, b) {
+        if(selectedDirection=="asc"){
+          return a[selectedCriteria] - b[selectedCriteria];
+        }
+        else{
+          return b[selectedCriteria] - a[selectedCriteria];
+        }
+        
+      });
+      console.log(data);
+      drawList(data);
+    });
+
+    drawList(data);
   })
   .catch((error) => {
     console.error("Error:", error);
