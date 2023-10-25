@@ -56,6 +56,10 @@ fetch("/data/data.json")
   
       // Output the result
       console.log("Group by vader label:",groupByScoreVaderLabel);
+
+      for (let i = 0; i < 15; i++) {
+        document.getElementById('post-list').innerHTML += generateFeedbackHTML(data[i]);
+      }    
   })
   .catch((error) => {
     console.error("Error:", error);

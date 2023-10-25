@@ -1,0 +1,7 @@
+.star{
+    width: 15px;
+    height: 15px;
+    unicode-bidi: bidi-override;
+    direction: ltr;
+    display: inline-block;
+}
